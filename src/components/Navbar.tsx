@@ -18,7 +18,7 @@ const Navbar = () => {
         <input
           className="bg-white rounded-l-xl text-black px-3 w-200 h-10"
           type="text"
-          placeholder="search"
+          placeholder="search for stocks.."
         />
         <button className="bg-blue-700 text-white rounded-r-xl px-3 h-10 w-10" >
           🔎
