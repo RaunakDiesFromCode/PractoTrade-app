@@ -5,10 +5,10 @@ import { useCompanyList } from "./useCompanyList";
 
 interface StockApiResponse {
   company: string;
-  predicted_Close: number;
-  prediction_time: string;
+  avg_predicted_price: number;
   predicted_percentage_change: number;
   direction: string;
+  prediction_time: string;
 }
 
 interface CompanyCardData {
@@ -45,18 +45,18 @@ export const useStockPredictions = () => {
           // Calculate current stock price based on the predicted percentage change
           const currentPrice = Number(
             (
-              data.predicted_Close /
+              data.avg_predicted_price /
               (1 + data.predicted_percentage_change / 100)
             ).toFixed(2)
           );
 
           return {
             companyName: company.name,
-            ticker: tickerWithSuffix, // Return the correct ticker for each company
+            ticker: tickerWithSuffix,
             currentStockPrice: currentPrice,
-            futureStockPrice: data.predicted_Close,
+            futureStockPrice: data.avg_predicted_price,
             growth: data.predicted_percentage_change,
-            isIn: company.is_in, // Whether the company is based in India
+            isIn: company.is_in,
           };
         })
       );

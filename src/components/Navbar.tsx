@@ -33,7 +33,7 @@ const Navbar = () => {
           </Button>
         </div>
         <div className="flex ml-5 gap-3">
-          <Button asChild>
+          <Button asChild variant={"outline"}>
             <Link href="\">Login</Link>
           </Button>
           {/* <Button asChild>
