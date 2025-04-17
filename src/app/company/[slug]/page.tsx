@@ -1,5 +1,14 @@
+// src/app/company/[slug]/page.tsx
+
 import StockPageClient from "@/components/StockPageClient";
 
-export default function CompanyPage({ params }: { params: { slug: string } }) {
-  return <StockPageClient slug={params.slug} />;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  return <div>My Post: {slug}
+    <StockPageClient slug={slug} />
+  </div>;
 }
