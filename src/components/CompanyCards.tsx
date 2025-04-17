@@ -11,7 +11,7 @@ const CompanyCards: React.FC = () => {
   if (isLoading) {
     // Render skeletons while loading
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {Array.from({ length: 9 }).map((_, i) => (
           <SkeletonCard key={i} />
         ))}
@@ -36,7 +36,7 @@ const CompanyCards: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {companies.map((company) => (
         <CompanyCard
           key={company.ticker} // Use ticker as the key
