@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/components/ReactQueryProvider"; // ⬅️ new import
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,12 +18,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` antialiased`}>
-        <ReactQueryProvider>
-          <nav className="fixed top-0 left-0 right-0 z-50 bg-black">
-            <Navbar />
-          </nav>
-          <main className="mt-20">{children}</main>
-        </ReactQueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ReactQueryProvider>
+            <nav className="fixed top-0 left-0 right-0 z-50">
+              <Navbar />
+            </nav>
+            <main className="mt-21">{children}</main>
+          </ReactQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
