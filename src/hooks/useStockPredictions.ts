@@ -13,10 +13,11 @@ interface StockApiResponse {
 
 interface CompanyCardData {
   companyName: string;
-  code: string;
+  ticker: string; // Ticker will be directly used
   currentStockPrice: number;
   futureStockPrice: number;
   growth: number;
+  isIn: boolean; // Whether the company is based in India (INR) or not (USD)
 }
 
 export const useStockPredictions = () => {
@@ -26,12 +27,17 @@ export const useStockPredictions = () => {
     queryKey: ["stock-predictions"],
     enabled: !!companies, // only run if companies are loaded
     queryFn: async () => {
-      const codes = Object.keys(companies!);
+      const tickers = Object.keys(companies!);
 
       const results = await Promise.all(
-        codes.map(async (code) => {
+        tickers.map(async (ticker) => {
+          const company = companies![ticker];
+
+          // Use the ticker as provided, without modification
+          const tickerWithSuffix = company.ticker; // Use the actual ticker, such as TCS.NS, ITCLTD.NS, etc.
+
           const res = await axios.get<StockApiResponse>(
-            `https://implicit-electra-sagnify-8514ada8.koyeb.app/get_predicted_stock_price/${code}/`
+            `https://implicit-electra-sagnify-8514ada8.koyeb.app/get_predicted_stock_price/${tickerWithSuffix}/`
           );
 
           const data = res.data;
@@ -45,11 +51,12 @@ export const useStockPredictions = () => {
           );
 
           return {
-            companyName: companies![code],
-            code: code,
+            companyName: company.name,
+            ticker: tickerWithSuffix, // Return the correct ticker for each company
             currentStockPrice: currentPrice,
             futureStockPrice: data.predicted_Close,
             growth: data.predicted_percentage_change,
+            isIn: company.is_in, // Whether the company is based in India
           };
         })
       );
@@ -57,7 +64,6 @@ export const useStockPredictions = () => {
       return results;
     },
     staleTime: 1000 * 60 * 5, // cache for 5 minutes
-    // cacheTime: 1000 * 60 * 10, // cache for 10 minutes
     refetchOnWindowFocus: false,
     retry: 1,
   });
