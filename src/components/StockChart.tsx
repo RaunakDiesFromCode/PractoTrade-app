@@ -115,7 +115,7 @@ export function StockChart({ name }: StockChartProps) {
       <Separator />
       <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
-          *Data from the last 7 days
+          *Data might not be fully accurate
         </div>
       </CardFooter>
     </Card>

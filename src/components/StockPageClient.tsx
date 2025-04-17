@@ -6,6 +6,8 @@ import { StockChart } from "@/components/StockChart";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Posts from "./Posts";
+import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
+
 
 export default function StockPageClient({ slug }: { slug: string }) {
   const {
@@ -45,17 +47,26 @@ export default function StockPageClient({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="px-20 pt-5 flex gap-5 w-full">
+    <div className="px-20 pt-5 flex gap-3 w-full">
       <div className="w-full">
         <StockChart name={slug} />
       </div>
       <div className="w-full">
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-3">
           <Card>
             <div className="flex gap-2 items-center justify-between px-5">
               <CardHeader>
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-2xl flex gap-1 items-center">
                   {company.companyName}
+                  {typeof company.growth === "number" ? (
+                    company.growth >= 0 ? (
+                      <TrendingUp className="text-green-500" />
+                    ) : (
+                      <TrendingDown className="text-red-500" />
+                    )
+                  ) : (
+                    <TrendingUpDown className="text-muted-foreground" />
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent>
