@@ -126,3 +126,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+html,
+body {
+  touch-action: pan-y;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+}
