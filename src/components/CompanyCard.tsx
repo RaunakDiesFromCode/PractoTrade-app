@@ -1,4 +1,20 @@
 import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Separator } from "./ui/separator";
+import {
+  ChevronRight,
+  TrendingDown,
+  TrendingUp,
+  TrendingUpDown,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface CompanyCardProps {
   companyName: string;
@@ -28,36 +44,75 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   };
 
   return (
-    <div className="company-card border rounded-lg shadow-md p-4 text-black flex items-center space-x-4 bg-white">
-      <div className="flex-1">
-        <h2 className="text-lg font-bold">{companyName}</h2>
-        <p className="text-sm text-gray-500">{ticker}</p> {/* Display ticker */}
-        <div className="mt-2">
-          <p>
-            Current Price:{" "}
-            <span className="font-semibold">
-              {formatPrice(currentStockPrice, isIn)}
-            </span>
-          </p>
-          <p>
-            Future Price:{" "}
-            <span className="font-semibold">
-              {formatPrice(futureStockPrice, isIn)}
-            </span>
-          </p>
-          <p
-            className={`font-semibold ${
-              isGrowthPositive ? "text-green-500" : "text-red-500"
-            }`}
-          >
-            Growth:{" "}
-            {typeof growth === "number"
-              ? `${isGrowthPositive ? "+" : ""}${growth.toFixed(2)}%`
-              : "N/A"}
-          </p>
+    <Link href={`/company/${ticker}`}>
+      <Card className="gap-2 h-fit pt-3 pb-1 hover:scale-101 transition-all duration-200 ease-in-out">
+        <div className="flex items-center justify-between px-5">
+          <CardHeader className="p-0 m-0 w-full">
+            <CardTitle className="font-bold text-xl">{ticker}</CardTitle>
+            <CardDescription className="pb-0 mb-0">
+              {companyName}
+            </CardDescription>
+          </CardHeader>
+          <div className="flex flex-col items-center justify-center">
+            <div
+              className={`font-semibold ${
+                isGrowthPositive ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {typeof growth === "number" ? (
+                isGrowthPositive ? (
+                  <TrendingUp />
+                ) : (
+                  <TrendingDown />
+                )
+              ) : (
+                <TrendingUpDown />
+              )}
+            </div>
+            <p
+              className={`font-semibold ${
+                isGrowthPositive ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {/* Growth:{" "} */}
+              {typeof growth === "number"
+                ? `${isGrowthPositive ? "+" : ""}${growth.toFixed(2)}%`
+                : "N/A"}
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
+        <Separator className="" />
+
+        <CardContent className="flex justify-between items-center">
+          <div className="mt-2">
+            <div className="flex h-10 items-center space-x-4 my-4 text-sm">
+              <div className="flex flex-col text-sm">
+                <span>Current Price </span>
+                <span className="font-semibold text-xl">
+                  {formatPrice(currentStockPrice, isIn)}
+                </span>
+              </div>
+
+              <Separator orientation="vertical" />
+
+              <div className="flex flex-col text-sm">
+                <span>Predicted Price </span>
+                <span className="font-semibold text-xl">
+                  {formatPrice(futureStockPrice, isIn)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <Button
+            variant={"ghost"}
+            className="dark:hover:bg-card hover:bg-card"
+          >
+            <ChevronRight />
+          </Button>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 
