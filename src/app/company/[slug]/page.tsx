@@ -2,12 +2,10 @@
 
 import StockPageClient from "@/components/StockPageClient";
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
+interface PageProps {
+  params: { slug: string };
+}
 
-export default function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
   return <StockPageClient slug={params.slug} />;
 }
