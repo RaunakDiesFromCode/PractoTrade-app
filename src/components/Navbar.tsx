@@ -26,10 +26,10 @@ const Navbar = () => {
           <Input
             className="px-3 w-200 rounded-r-none text-background font-semibold placeholder:text-background/50"
             type="text"
-            placeholder="search for stocks.."
+            placeholder="search for stocks..."
           />
           <Button className=" cursor-pointer rounded-l-none px-3  w-10">
-            <Search/>
+            <Search />
           </Button>
         </div>
         <div className="flex ml-5 gap-3">

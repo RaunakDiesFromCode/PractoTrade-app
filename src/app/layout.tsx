@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/components/ReactQueryProvider"; // ⬅️ new import
 import { ThemeProvider } from "next-themes";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +30,7 @@ export default function RootLayout({
               <Navbar />
             </nav>
             <main className="mt-21">{children}</main>
+            <Footer />
           </ReactQueryProvider>
         </ThemeProvider>
       </body>
