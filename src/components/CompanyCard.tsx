@@ -87,7 +87,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
           <div className="mt-2">
             <div className="flex h-10 items-center space-x-4 my-4 text-sm">
               <div className="flex flex-col text-sm">
-                <span>Current Price </span>
+                <span>Reference Price </span>
                 <span className="font-semibold text-xl">
                   {formatPrice(currentStockPrice, isIn)}
                 </span>

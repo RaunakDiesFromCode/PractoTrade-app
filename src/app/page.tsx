@@ -1,9 +1,9 @@
-import CompanyCards from "@/components/CompanyCards";
+import Homepage from "@/components/Homepage";
 import React from "react";
 
 const page = () => {
   return <div>
-    <CompanyCards />
+    <Homepage />
   </div>;
 };
 
