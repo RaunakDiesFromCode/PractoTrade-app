@@ -2,8 +2,8 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "./ui/separator";
-import useRedditPosts from "../hooks/useRedditPosts";
 import { MessageSquare, ThumbsUp } from "lucide-react";
+import useRedditPosts from "@/hooks/useRedditPosts";
 
 const Posts = ({ name }: { name: string }) => {
   const { posts, loading, error } = useRedditPosts(name);

@@ -1,4 +1,4 @@
-// src/app/company/[slug]/page.tsx (or wherever your route is)
+// src/app/company/[slug]/page.tsx
 
 import StockPageClient from "@/components/StockPageClient";
 
