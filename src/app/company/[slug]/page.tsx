@@ -1,10 +1,13 @@
-import { use } from "react";
+// src/app/company/[slug]/page.tsx (or wherever your route is)
 
-export default function CategoryDetail({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
-  return <div>Category ID: {id}</div>;
+import StockPageClient from "@/components/StockPageClient";
+
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default function Page({ params }: PageProps) {
+  return <StockPageClient slug={params.slug} />;
 }
