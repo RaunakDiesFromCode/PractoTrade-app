@@ -1,11 +1,5 @@
-// src/app/company/[slug]/page.tsx
-
 import StockPageClient from "@/components/StockPageClient";
 
-interface PageProps {
-  params: { slug: string };
-}
-
-export default async function Page({ params }: PageProps) {
+export default function Page({ params }: { params: { slug: string } }) {
   return <StockPageClient slug={params.slug} />;
 }
