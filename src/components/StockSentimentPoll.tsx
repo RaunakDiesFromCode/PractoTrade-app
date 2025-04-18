@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 import { useCompanyPoll } from "@/hooks/useCompanyPoll";
 
 type Props = {
@@ -19,29 +20,26 @@ type Props = {
 };
 
 export default function StockSentimentPoll({ symbol }: Props) {
+  const { user } = useAuth(); // ✅ Get user
   const { pollData, selectedOption, setSelectedOption, hasVoted, submitVote } =
-    useCompanyPoll(symbol);
+    useCompanyPoll(symbol, user); // ✅ Pass user to hook
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // start fade out
-
+      setFade(false);
       setTimeout(() => {
-        setCurrentIndex((prevIndex) =>
-          pollData ? (prevIndex + 1) % pollData.options.length : 0
+        setCurrentIndex((prev) =>
+          pollData ? (prev + 1) % pollData.options.length : 0
         );
-        setFade(true); // start fade in
-      }, 300); // fade out duration (ms)
-    }, 5000); // cycle every 3 seconds
-
+        setFade(true);
+      }, 300);
+    }, 5000);
     return () => clearInterval(interval);
   }, [pollData]);
-
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -69,13 +67,8 @@ export default function StockSentimentPoll({ symbol }: Props) {
             fade ? "opacity-100" : "opacity-0"
           )}
         >
-          {pollData &&
-            pollData.options.length > 0 &&
-            `${
-              pollData.options[currentIndex].percentage
-            }% people think ${pollData.options[
-              currentIndex
-            ].text.toLowerCase()}`}
+          {pollData.options[currentIndex]?.percentage}% people think{" "}
+          {pollData.options[currentIndex]?.text.toLowerCase()}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
@@ -112,9 +105,7 @@ export default function StockSentimentPoll({ symbol }: Props) {
             disabled={!selectedOption || isSubmitting}
             className="w-full cursor-pointer"
           >
-            {isSubmitting ? (
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            ) : null}
+            {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             {isSubmitting ? "Submitting..." : "Submit Vote"}
           </Button>
         ) : (

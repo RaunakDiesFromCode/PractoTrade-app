@@ -96,8 +96,6 @@ export default function StockPageClient({ slug }: { slug: string }) {
   return (
     <div className="px-20 pt-5 flex gap-3 w-full">
       <div className="w-full flex flex-col gap-3">
-
-
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl flex w-full items-center justify-between">
@@ -209,14 +207,16 @@ export default function StockPageClient({ slug }: { slug: string }) {
               asChild
               className="w-fit mx-10 p-2.5 my-0"
               variant={"outline"}
-              size={"icon"}
             >
               <Link
                 href={"https://finance.yahoo.com/quote/" + slug + "/"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYahoo />
+                <div className="flex items-center gap-2">
+                  <FaYahoo size={64}/>
+                  <div>View on Yahoo Finance</div>
+                </div>
               </Link>
             </Button>
           </Card>

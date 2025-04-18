@@ -1,18 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Input } from "./ui/input";
+import { getUser, logout } from "@/lib/auth";
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = getUser();
+    if (user) setIsLoggedIn(true);
+  }, []);
+
   return (
-    // <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-fit">
-    <div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg  px-30 py-0.5  border border-white/15 h-[70px]">
+    <div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg px-30 py-0.5 border border-white/15 h-[70px]">
       {/* Left Section: Logo, Home, News */}
       <div className="flex items-center gap-5">
         <Image
@@ -36,21 +43,32 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Right Section: Search Bar, Login, Night Mode */}
+      {/* Right Section: Search Bar, Auth Button, Theme Toggle */}
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-0">
           <Input
-            className="px-3 w-60 rounded-r-none font-semibold  bg-transparent"
+            className="px-3 w-60 rounded-r-none font-semibold bg-transparent"
             type="text"
             placeholder="Search for stocks..."
           />
-          <Button className="cursor-pointer rounded-l-none px-3 w-10" variant={"outline"}>
+          <Button
+            className="cursor-pointer rounded-l-none px-3 w-10"
+            variant={"outline"}
+          >
             <Search />
           </Button>
         </div>
-        <Button asChild variant="outline">
-          <Link href="/">Login</Link>
-        </Button>
+
+        {isLoggedIn ? (
+          <Button variant="outline" onClick={logout}>
+            Logout
+          </Button>
+        ) : (
+          <Button asChild variant="outline">
+            <Link href="/login">Login</Link>
+          </Button>
+        )}
+
         <Button
           variant="outline"
           size="icon"
