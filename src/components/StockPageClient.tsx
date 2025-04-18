@@ -5,7 +5,6 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
@@ -37,13 +36,13 @@ import { StockChart7D } from "./StockChart7D";
 import { StockChartRealtime } from "./StockChartRealtime";
 
 const chartOptions = [
-  { value: "1d", label: "1 Day" },
+  { value: "1d", label: "Yesterday" },
   { value: "7d", label: "7 Days" },
   { value: "realtime", label: "Realtime" },
 ];
 
 export default function StockPageClient({ slug }: { slug: string }) {
-  const [selectedChart, setSelectedChart] = useState("1d");
+  const [selectedChart, setSelectedChart] = useState("realtime");
   const [open, setOpen] = useState(false);
 
   const {
@@ -97,57 +96,59 @@ export default function StockPageClient({ slug }: { slug: string }) {
   return (
     <div className="px-20 pt-5 flex gap-3 w-full">
       <div className="w-full flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Select Chart View</h2>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                className="w-[200px] justify-between"
-              >
-                {chartOptions.find((option) => option.value === selectedChart)
-                  ?.label || "Select chart"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput
-                  placeholder="Search chart type..."
-                  className="h-9"
-                />
-                <CommandList>
-                  <CommandEmpty>No chart found.</CommandEmpty>
-                  <CommandGroup>
-                    {chartOptions.map((option) => (
-                      <CommandItem
-                        key={option.value}
-                        value={option.value}
-                        onSelect={(value) => {
-                          setSelectedChart(value);
-                          setOpen(false);
-                        }}
-                      >
-                        {option.label}
-                        <Check
-                          className={cn(
-                            "ml-auto",
-                            selectedChart === option.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-        </div>
 
-        {renderChart()}
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl flex w-full items-center justify-between">
+              <div>{slug} Stock Price</div>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className="w-[200px] justify-between"
+                  >
+                    {chartOptions.find(
+                      (option) => option.value === selectedChart
+                    )?.label || "Select chart"}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandList>
+                      <CommandEmpty>No chart found.</CommandEmpty>
+                      <CommandGroup>
+                        {chartOptions.map((option) => (
+                          <CommandItem
+                            key={option.value}
+                            value={option.value}
+                            onSelect={(value) => {
+                              setSelectedChart(value);
+                              setOpen(false);
+                            }}
+                          >
+                            {option.label}
+                            <Check
+                              className={cn(
+                                "ml-auto",
+                                selectedChart === option.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </CardTitle>
+          </CardHeader>
+          {renderChart()}
+        </Card>
         <StockSentimentPoll symbol={slug} />
       </div>
 

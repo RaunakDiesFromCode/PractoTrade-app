@@ -2,11 +2,9 @@
 
 import { AreaChart, Area, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
-  Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
+
 } from "@/components/ui/card";
 import {
   ChartContainer,
@@ -46,10 +44,7 @@ export function StockChart1D({ name }: StockChartProps) {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-2xl">{name} Weekly Stock Price</CardTitle>
-      </CardHeader>
+    <>
       <CardContent className="h-fit">
         <ChartContainer config={chartConfig}>
           <AreaChart
@@ -118,6 +113,6 @@ export function StockChart1D({ name }: StockChartProps) {
           *Data might not be fully accurate
         </div>
       </CardFooter>
-    </Card>
+    </>
   );
 }
