@@ -2,9 +2,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import ReactQueryProvider from "@/components/ReactQueryProvider"; // ⬅️ new import
+import ReactQueryProvider from "@/components/ReactQueryProvider";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
+import Script from "next/script"; // ✅ Import Script
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` antialiased`}>
+      <head>
+        {/* ✅ Cloudflare Web Analytics Script */}
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "ec707fbbd78c41ff8b1d2c32ae5c75e2"}'
+          strategy="afterInteractive"
+        />
+      </head>
+      <body className={`antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
