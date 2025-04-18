@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-fit">
+    <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-[70px] ">
       {/* Left Section: Logo, Home, News */}
       <div className="flex items-center gap-5">
         <Link href="/">
@@ -23,10 +23,10 @@ const Navbar = () => {
             alt="logo"
           />
         </Link>
-        <Link href="/home" className="text-white text-lg hover:underline">
+        <Link href="/home" className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white">
           Home
         </Link>
-        <Link href="/news" className="text-white text-lg hover:underline">
+        <Link href="/news" className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white">
           News
         </Link>
       </div>
@@ -43,7 +43,7 @@ const Navbar = () => {
             <Search />
           </Button>
         </div>
-        <Button asChild variant="outline" >
+        <Button asChild variant="outline">
           <Link href="/">Login</Link>
         </Button>
         <Button

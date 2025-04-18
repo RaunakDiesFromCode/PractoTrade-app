@@ -1,19 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { Separator } from "./ui/separator";
-import { MessageSquare, ThumbsUp } from "lucide-react";
+import { ChevronRight, MessageSquare, ThumbsUp } from "lucide-react";
 import useRedditPosts from "@/hooks/useRedditPosts";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 const Posts = ({ name }: { name: string }) => {
   const { posts, loading, error } = useRedditPosts(name);
 
   return (
     <Card className="w-full">
-      <CardHeader className="p-0 m-0 w-full px-10">
-        <CardTitle className="text-2xl">Top News of {name}</CardTitle>
-        <CardDescription>Powered by Reddit</CardDescription>
+      <CardHeader className="p-0 m-0 w-full px-10 flex items-center">
+        <div className="w-full">
+          <CardTitle className="text-2xl">Top News of {name}</CardTitle>
+          <CardDescription>Powered by Reddit</CardDescription>
+        </div>
+        <Button variant={"outline"} asChild size={"icon"}>
+          <Link href={"/news"}>
+            <ChevronRight />
+          </Link>
+        </Button>
       </CardHeader>
       <Separator />
       <CardContent className=" space-y-4 px-10">
@@ -158,6 +172,14 @@ const Posts = ({ name }: { name: string }) => {
             </div>
           )
         )}
+        <div className="flex justify-end">
+          <Button variant={"outline"} asChild>
+            <Link href={"/news"}>
+              Read more news, posts, and comments
+              <ChevronRight />
+            </Link>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

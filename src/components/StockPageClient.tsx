@@ -8,6 +8,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Posts from "./Posts";
 import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
 import StockSentimentPoll from "./StockSentimentPoll";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { Separator } from "./ui/separator";
+import { FaYahoo } from "react-icons/fa";
 
 export default function StockPageClient({ slug }: { slug: string }) {
   const {
@@ -55,7 +59,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
       <div className="w-full">
         <div className="w-full flex flex-col gap-3">
           <Card>
-            <div className="flex gap-2 items-center justify-between px-5">
+            <div className="flex items-center justify-between px-5">
               <CardHeader>
                 <CardTitle className="text-2xl flex gap-1 items-center">
                   {company.companyName}
@@ -104,6 +108,21 @@ export default function StockPageClient({ slug }: { slug: string }) {
                 </div>
               </CardContent>
             </div>
+            <Separator />
+            <Button
+              asChild
+              className="w-fit mx-10 p-2.5 my-0"
+              variant={"outline"}
+              size={"icon"}
+            >
+              <Link
+                href={"https://finance.yahoo.com/quote/" + slug + "/"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYahoo />
+              </Link>
+            </Button>
           </Card>
           <Posts name={slug} />
         </div>
