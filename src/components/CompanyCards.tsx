@@ -3,15 +3,15 @@
 import React from "react";
 import CompanyCard from "./CompanyCard";
 import SkeletonCard from "./SkeletonCard";
-import { useStockPredictions } from "@/hooks/useStockPredictions";
+import { useCompanyList } from "@/hooks/useCompanyList";
+import { useSingleStockPrediction } from "@/hooks/useSingleStockPrediction";
 
 const CompanyCards: React.FC = () => {
-  const { data: companies, isLoading, isError, error } = useStockPredictions();
+  const { data: companies, isLoading, isError, error } = useCompanyList();
 
   if (isLoading) {
-    // Render skeletons while loading
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Array.from({ length: 9 }).map((_, i) => (
           <SkeletonCard key={i} />
         ))}
@@ -19,37 +19,43 @@ const CompanyCards: React.FC = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !companies) {
     return (
       <div className="text-center text-red-500 py-10">
-        Error fetching stock data: {(error as Error).message}
-      </div>
-    );
-  }
-
-  if (!companies || companies.length === 0) {
-    return (
-      <div className="text-center text-gray-500 py-10">
-        No stock predictions available.
+        Error loading companies: {(error as Error).message}
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {companies.map((company) => (
-        <CompanyCard
-          key={company.ticker} // Use ticker as the key
-          companyName={company.companyName}
-          ticker={company.ticker} // Pass ticker here
-          currentStockPrice={company.currentStockPrice}
-          futureStockPrice={company.futureStockPrice}
-          growth={company.growth}
-          isIn={company.isIn} // Pass isIn as well
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      {Object.entries(companies).map(([ticker, company]) => (
+        <CompanyPredictionWrapper
+          key={ticker}
+          ticker={company.ticker}
+          name={company.name}
+          isIn={company.is_in}
         />
       ))}
     </div>
   );
+};
+
+const CompanyPredictionWrapper: React.FC<{
+  ticker: string;
+  name: string;
+  isIn: boolean;
+}> = ({ ticker, name, isIn }) => {
+  const {
+    data: prediction,
+    isLoading,
+    isError,
+  } = useSingleStockPrediction(ticker, name, isIn);
+
+  if (isLoading) return <SkeletonCard />;
+  if (isError || !prediction) return null;
+
+  return <CompanyCard {...prediction} />;
 };
 
 export default CompanyCards;

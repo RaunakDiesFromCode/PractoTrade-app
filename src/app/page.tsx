@@ -7,7 +7,9 @@ const page = () => {
   return (
     <div className="w-screen h-[84vh] px-20 pt-5 flex flex-col justify-center items-center text-center">
       <h1 className="text-5xl font-bold mb-5">Practo Trade</h1>
-      <p className="text-2xl mb-10">"Decode Sentiment, Trade Confidently"</p>
+      <p className="text-2xl mb-10">
+        &quot;Decode Sentiment, Trade Confidently&quot;
+      </p>
 
       <Image
         src="/landing.jpg"
