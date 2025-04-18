@@ -11,8 +11,8 @@ import { Input } from "./ui/input";
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   return (
-    // <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-fit">
-    <div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg  px-30 py-0.5  border border-white/15 h-[70px]">
+<div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg  px-30 py-0.5  border border-white/15 h-[70px]">
+
       {/* Left Section: Logo, Home, News */}
       <div className="flex items-center gap-5">
         <Image
