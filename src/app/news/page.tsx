@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useNews } from "@/components/useNews";
 
 export default function NewsPage() {
@@ -8,10 +8,6 @@ export default function NewsPage() {
   if (error) return <div className="p-8 text-red-500">Error: {error}</div>;
 
   return (
-<<<<<<< HEAD
-    <div className='px-20 pt-5 h-screen'>news page</div>
-  )
-=======
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">Latest News</h1>
       <ul className="space-y-4">
@@ -34,5 +30,4 @@ export default function NewsPage() {
       </ul>
     </div>
   );
->>>>>>> 680e74c (add news fetching functionality and update NewsPage UI)
 }
