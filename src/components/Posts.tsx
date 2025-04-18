@@ -23,11 +23,7 @@ const Posts = ({ name }: { name: string }) => {
           <CardTitle className="text-2xl">Top News of {name}</CardTitle>
           <CardDescription>Powered by Reddit</CardDescription>
         </div>
-        <Button variant={"outline"} asChild size={"icon"}>
-          <Link href={"/news"}>
-            <ChevronRight />
-          </Link>
-        </Button>
+        
       </CardHeader>
       <Separator />
       <CardContent className=" space-y-4 px-10">
