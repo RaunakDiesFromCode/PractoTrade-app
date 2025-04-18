@@ -2,11 +2,8 @@
 
 import { AreaChart, Area, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
-  Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   ChartContainer,
@@ -15,7 +12,7 @@ import {
 } from "@/components/ui/chart";
 import { Separator } from "./ui/separator";
 
-import { useStockChartData } from "@/hooks/useStockChartData";
+import { useStockChartDataRealtime } from "@/hooks/useStockChartDataRealtime";
 
 const chartConfig = {
   high: {
@@ -32,8 +29,8 @@ type StockChartProps = {
   name: string; // e.g. "TCS.NS"
 };
 
-export function StockChart({ name }: StockChartProps) {
-  const { data } = useStockChartData(name);
+export function StockChartRealtime({ name }: StockChartProps) {
+  const { data } = useStockChartDataRealtime(name);
 
   const getDomain = (): [number, number] => {
     if (data.length === 0) return [0, 100];
@@ -46,10 +43,7 @@ export function StockChart({ name }: StockChartProps) {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-2xl">{name} Weekly Stock Price</CardTitle>
-      </CardHeader>
+    <>
       <CardContent className="h-fit">
         <ChartContainer config={chartConfig}>
           <AreaChart
@@ -118,6 +112,6 @@ export function StockChart({ name }: StockChartProps) {
           *Data might not be fully accurate
         </div>
       </CardFooter>
-    </Card>
+    </>
   );
 }

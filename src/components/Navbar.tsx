@@ -11,23 +11,31 @@ import { Input } from "./ui/input";
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   return (
+<<<<<<< HEAD
     // <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-fit">
     <div className="w-full flex justify-between items-center bg-black/70 backdrop-blur-lg  px-30 py-0.5  border border-white/15 h-[70px]">
+=======
+    <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-[70px] ">
+>>>>>>> 08809e2757cbcc1101473c24f0836075278d3b1b
       {/* Left Section: Logo, Home, News */}
       <div className="flex items-center gap-5">
-        <Link href="/">
-          <Image
-            src="/practo.png"
-            width={100}
-            height={100}
-            className="rounded-full"
-            alt="logo"
-          />
-        </Link>
-        <Link href="/home" className="text-white text-lg hover:underline">
+        <Image
+          src="/practo.png"
+          width={100}
+          height={100}
+          className="rounded-full"
+          alt="logo"
+        />
+        <Link
+          href="/home"
+          className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+        >
           Home
         </Link>
-        <Link href="/news" className="text-white text-lg hover:underline">
+        <Link
+          href="/news"
+          className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+        >
           News
         </Link>
       </div>
@@ -36,11 +44,11 @@ const Navbar = () => {
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-0">
           <Input
-            className="px-3 w-40 rounded-r-none font-semibold  bg-transparent"
+            className="px-3 w-60 rounded-r-none font-semibold  bg-transparent"
             type="text"
             placeholder="Search for stocks..."
           />
-          <Button className="cursor-pointer rounded-l-none px-3 w-10">
+          <Button className="cursor-pointer rounded-l-none px-3 w-10" variant={"outline"}>
             <Search />
           </Button>
         </div>
