@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/chart";
 import { Separator } from "./ui/separator";
 
-import { useStockChartData } from "@/hooks/useStockChartData";
+import { useStockChartDataRealtime } from "@/hooks/useStockChartDataRealtime";
 
 const chartConfig = {
   high: {
@@ -32,8 +32,8 @@ type StockChartProps = {
   name: string; // e.g. "TCS.NS"
 };
 
-export function StockChart({ name }: StockChartProps) {
-  const { data } = useStockChartData(name);
+export function StockChartRealtime({ name }: StockChartProps) {
+  const { data } = useStockChartDataRealtime(name);
 
   const getDomain = (): [number, number] => {
     if (data.length === 0) return [0, 100];

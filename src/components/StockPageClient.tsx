@@ -1,19 +1,51 @@
 "use client";
 
+import { useState } from "react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import {
+  Check,
+  ChevronsUpDown,
+  TrendingDown,
+  TrendingUp,
+  TrendingUpDown,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import StockSentimentPoll from "./StockSentimentPoll";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import Posts from "./Posts";
+import { Separator } from "./ui/separator";
+import Link from "next/link";
+import { FaYahoo } from "react-icons/fa";
 import { useCompanyList } from "@/hooks/useCompanyList";
 import { useSingleStockPrediction } from "@/hooks/useSingleStockPrediction";
-import { StockChart } from "@/components/StockChart";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import Posts from "./Posts";
-import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
-import StockSentimentPoll from "./StockSentimentPoll";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { Separator } from "./ui/separator";
-import { FaYahoo } from "react-icons/fa";
+import { StockChart1D } from "./StockChart1D";
+import { StockChart7D } from "./StockChart7D";
+import { StockChartRealtime } from "./StockChartRealtime";
+
+const chartOptions = [
+  { value: "1d", label: "1 Day" },
+  { value: "7d", label: "7 Days" },
+  { value: "realtime", label: "Realtime" },
+];
 
 export default function StockPageClient({ slug }: { slug: string }) {
+  const [selectedChart, setSelectedChart] = useState("1d");
+  const [open, setOpen] = useState(false);
+
   const {
     data: companies,
     isLoading: isCompaniesLoading,
@@ -21,7 +53,6 @@ export default function StockPageClient({ slug }: { slug: string }) {
   } = useCompanyList();
 
   const tickerKey = slug.toUpperCase();
-
   const companyMeta = companies?.[tickerKey];
 
   const {
@@ -50,12 +81,76 @@ export default function StockPageClient({ slug }: { slug: string }) {
     );
   }
 
+  const renderChart = () => {
+    switch (selectedChart) {
+      case "1d":
+        return <StockChart1D name={slug} />;
+      case "7d":
+        return <StockChart7D name={slug} />;
+      case "realtime":
+        return <StockChartRealtime name={slug} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="px-20 pt-5 flex gap-3 w-full">
       <div className="w-full flex flex-col gap-3">
-        <StockChart name={slug} />
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Select Chart View</h2>
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                className="w-[200px] justify-between"
+              >
+                {chartOptions.find((option) => option.value === selectedChart)
+                  ?.label || "Select chart"}
+                <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Search chart type..."
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>No chart found.</CommandEmpty>
+                  <CommandGroup>
+                    {chartOptions.map((option) => (
+                      <CommandItem
+                        key={option.value}
+                        value={option.value}
+                        onSelect={(value) => {
+                          setSelectedChart(value);
+                          setOpen(false);
+                        }}
+                      >
+                        {option.label}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            selectedChart === option.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {renderChart()}
         <StockSentimentPoll symbol={slug} />
       </div>
+
       <div className="w-full">
         <div className="w-full flex flex-col gap-3">
           <Card>

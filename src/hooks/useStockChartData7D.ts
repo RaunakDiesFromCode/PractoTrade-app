@@ -6,7 +6,7 @@ export type StockDataPoint = {
   low: number;
 };
 
-export function useStockChartData(name: string) {
+export function useStockChartData7D(name: string) {
   const [data, setData] = useState<StockDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
 
