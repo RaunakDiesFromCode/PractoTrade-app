@@ -8,7 +8,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  return <div>
+  return <div className="min-h-screen">
     <StockPageClient slug={slug} />
   </div>;
 }
