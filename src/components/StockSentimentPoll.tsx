@@ -86,20 +86,18 @@ export default function StockSentimentPoll({ symbol }: Props) {
               if (!hasVoted) setSelectedOption(option.id);
             }}
             className={cn(
-              "flex items-center justify-between px-4 py-3 rounded-md transition-colors",
+              "flex items-center justify-between px-4 py-3 rounded-md ",
               selectedOption === option.id
-                ? "bg-zinc-700"
-                : "bg-zinc-800 hover:bg-zinc-700"
+                ? "bg-green-500/50"
+                : "bg-foreground/5 hover:bg-foreground/10 transition-colors duration-150"
             )}
           >
             <div className="flex items-center gap-2">
               <span>{option.text}</span>
-              <span className="text-zinc-400 text-sm">{option.votes}</span>
+              <span className=" text-sm">{option.votes}</span>
             </div>
             <div className="flex items-center gap-2">
-              {hasVoted && (
-                <span className="text-zinc-300">{option.percentage}%</span>
-              )}
+              {hasVoted && <span className="">{option.percentage}%</span>}
               {selectedOption === option.id && (
                 <CheckIcon className="h-4 w-4 text-green-500" />
               )}

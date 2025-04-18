@@ -39,11 +39,11 @@ const Navbar = () => {
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-0">
           <Input
-            className="px-3 w-40 rounded-r-none font-semibold  bg-transparent"
+            className="px-3 w-60 rounded-r-none font-semibold  bg-transparent"
             type="text"
             placeholder="Search for stocks..."
           />
-          <Button className="cursor-pointer rounded-l-none px-3 w-10">
+          <Button className="cursor-pointer rounded-l-none px-3 w-10" variant={"outline"}>
             <Search />
           </Button>
         </div>
