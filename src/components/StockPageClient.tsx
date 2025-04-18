@@ -7,7 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Posts from "./Posts";
 import { TrendingDown, TrendingUp, TrendingUpDown } from "lucide-react";
-
+import StockSentimentPoll from "./StockSentimentPoll";
 
 export default function StockPageClient({ slug }: { slug: string }) {
   const {
@@ -48,8 +48,9 @@ export default function StockPageClient({ slug }: { slug: string }) {
 
   return (
     <div className="px-20 pt-5 flex gap-3 w-full">
-      <div className="w-full">
+      <div className="w-full flex flex-col gap-3">
         <StockChart name={slug} />
+        <StockSentimentPoll symbol={slug} />
       </div>
       <div className="w-full">
         <div className="w-full flex flex-col gap-3">
@@ -71,7 +72,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm flex items-center gap-4">
-                  <p className="flex justify-between flex-col items-end m-0">
+                  <div className="flex justify-between flex-col items-end m-0">
                     <div>Closing Price:</div>
                     <div className="font-semibold text-lg">
                       {company.currentStockPrice}{" "}
@@ -79,8 +80,8 @@ export default function StockPageClient({ slug }: { slug: string }) {
                         {company.isIn ? "INR" : "USD"}
                       </span>
                     </div>
-                  </p>
-                  <p className="flex justify-between flex-col items-end m-0">
+                  </div>
+                  <div className="flex justify-between flex-col items-end m-0">
                     <div>Predicted Price:</div>
                     <div className="font-semibold text-lg">
                       {company.futureStockPrice}{" "}
@@ -88,8 +89,8 @@ export default function StockPageClient({ slug }: { slug: string }) {
                         {company.isIn ? "INR" : "USD"}
                       </span>
                     </div>
-                  </p>
-                  <p className="flex justify-between flex-col items-end m-0">
+                  </div>
+                  <div className="flex justify-between flex-col items-end m-0">
                     <div>Growth:</div>
                     <div
                       className={`font-semibold text-lg ${
@@ -99,7 +100,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
                       {company.growth}
                       <span className="text-sm">%</span>
                     </div>
-                  </p>
+                  </div>
                 </div>
               </CardContent>
             </div>

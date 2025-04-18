@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Separator } from "./ui/separator";
 import { MessageSquare, ThumbsUp } from "lucide-react";
 import useRedditPosts from "@/hooks/useRedditPosts";
+import Link from "next/link";
 
 const Posts = ({ name }: { name: string }) => {
   const { posts, loading, error } = useRedditPosts(name);
@@ -135,14 +136,14 @@ const Posts = ({ name }: { name: string }) => {
             index: React.Key | null | undefined
           ) => (
             <div key={index} className="border-b pb-3">
-              <a
-                href={post.url}
+              <Link
+                href={post.url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-lg font-semibold hover:underline"
+                className="block text-lg font-semibold hover:scale-101 transition-transform duration-200"
               >
                 {post.title}
-              </a>
+              </Link>
               <p className="text-sm text-gray-600 flex gap-2 items-center">
                 <span className="flex items-center gap-1 text-lg">
                   r/{post.subreddit}{" "}
