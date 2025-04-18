@@ -45,7 +45,7 @@ export function useRegister() {
       }
 
       // ✅ Redirect on success
-      router.push("/login?registered=true");
+      router.push("/home");
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
