@@ -12,18 +12,28 @@ const page = () => {
       </p>
 
       <Image
-        src="/landing.jpg"
-        width={400}
-        height={400}
+        src="/practo_landing_3.png"
+        width={500}
+        height={500}
         className="rounded-lg shadow-lg mb-5"
         alt="Landing Page Image"
       />
+
+      {/* <div className="relative w-full max-w-[1000px] h-[1000px] mb-5">
+  <Image
+    src="/landing_page.png"
+    alt="Landing Page Image"
+    fill
+    className="object-cover rounded-lg shadow-lg"
+  />
+</div> */}
+
       <Button
         asChild
-        className="w-1/9 bg-chart-2 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-xl"
+        className="w-1/9 bg-black hover:bg-grey-600 text-white font-bold py-2 px-4 rounded-xl border-1 border-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
       >
         <Link href="/home">
-          <span>Home</span>
+          <span>Get started</span>
         </Link>
       </Button>
     </div>
