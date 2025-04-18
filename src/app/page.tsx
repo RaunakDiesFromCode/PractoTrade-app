@@ -45,7 +45,7 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-36 bg-gradient-to-b from-background to-muted">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-13">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
@@ -68,7 +68,6 @@ export default function LandingPage() {
                       Get started <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                 
                 </div>
                 <div className="flex items-center gap-4 text-sm">
                   <div className="flex items-center gap-1">
@@ -152,7 +151,7 @@ export default function LandingPage() {
         {/* How It Works Section */}
         <section
           id="how-it-works"
-          className="w-full py-12 md:py-24 lg:py-38 bg-muted"
+          className="w-full py-12 md:py-24 lg:py-40 bg-muted"
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -205,7 +204,7 @@ export default function LandingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
+        <section className="w-full py-12 md:py-20 lg:py-20 bg-primary text-primary-foreground">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
