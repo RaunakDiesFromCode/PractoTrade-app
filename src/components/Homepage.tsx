@@ -1,13 +1,18 @@
+"use client";
+
 import React from "react";
 import CompanyCards from "./CompanyCards";
 import { Button } from "./ui/button";
 import { ArrowUpDown, Bolt, Funnel, Languages } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const Homepage = () => {
+  const { user } = useAuth();
+
   return (
     <div className="px-20 pt-10">
       <div className="flex items-center gap-3 mb-5 mx-5 justify-between">
-        <span className="font-bold text-3xl">Hi Raunak!</span>
+        <span className="font-bold text-3xl">Hi {user?.username}!</span>
 
         <div className="flex items-center gap-2">
           <Button variant="outline">

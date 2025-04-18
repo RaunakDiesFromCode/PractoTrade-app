@@ -6,6 +6,7 @@ import ReactQueryProvider from "@/components/ReactQueryProvider";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
 import Script from "next/script"; // ✅ Import Script
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,7 +40,9 @@ export default function RootLayout({
             <nav className="fixed top-0 left-0 right-0 z-50">
               <Navbar />
             </nav>
-            <main className="mt-21">{children}</main>
+            <main className="mt-21">
+              <AuthProvider>{children}</AuthProvider>
+            </main>
             <Footer />
           </ReactQueryProvider>
         </ThemeProvider>

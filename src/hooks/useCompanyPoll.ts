@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { User } from "@/lib/auth"; // import User type
 
 export type PollOption = {
   id: number;
@@ -17,13 +18,13 @@ type PollData = {
   options: PollOption[];
 };
 
-export function useCompanyPoll(symbol: string) {
+export function useCompanyPoll(symbol: string, user: User | null) {
   const [pollData, setPollData] = useState<PollData | null>(null);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasVoted, setHasVoted] = useState(false);
 
   const today = new Date().toISOString().slice(0, 10);
-  const voteKey = `poll-vote-${symbol}-${today}`;
+  const voteKey = `poll-vote-${symbol}-${user?.trader_id || "anon"}-${today}`;
   const sessionKey = "poll-session-id";
 
   const getSessionId = () => {
@@ -35,7 +36,6 @@ export function useCompanyPoll(symbol: string) {
     return sessionId;
   };
 
-  // Function to fetch poll data
   const fetchPoll = useCallback(async () => {
     try {
       const res = await axios.get(
@@ -48,14 +48,10 @@ export function useCompanyPoll(symbol: string) {
     }
   }, [symbol, voteKey]);
 
-  // Fetch once on load + set interval
   useEffect(() => {
-    fetchPoll(); // initial load
-    const interval = setInterval(() => {
-      fetchPoll(); // refresh every 10 seconds
-    }, 10000);
-
-    return () => clearInterval(interval); // cleanup
+    fetchPoll();
+    const interval = setInterval(fetchPoll, 10000);
+    return () => clearInterval(interval);
   }, [symbol, fetchPoll]);
 
   const submitVote = async () => {
@@ -69,12 +65,13 @@ export function useCompanyPoll(symbol: string) {
         {
           session_id,
           option_id: selectedOption,
+          trader_id: user?.trader_id ?? null, // pass user ID
         }
       );
 
       localStorage.setItem(voteKey, "true");
       setHasVoted(true);
-      fetchPoll(); // immediately refresh after voting
+      fetchPoll();
     } catch (err) {
       console.error("Vote submission failed", err);
     }
