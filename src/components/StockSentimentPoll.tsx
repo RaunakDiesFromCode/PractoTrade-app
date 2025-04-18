@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -22,6 +23,25 @@ export default function StockSentimentPoll({ symbol }: Props) {
     useCompanyPoll(symbol);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false); // start fade out
+
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) =>
+          pollData ? (prevIndex + 1) % pollData.options.length : 0
+        );
+        setFade(true); // start fade in
+      }, 300); // fade out duration (ms)
+    }, 5000); // cycle every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [pollData]);
+
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -41,10 +61,22 @@ export default function StockSentimentPoll({ symbol }: Props) {
 
   return (
     <Card className="w-full mx-auto">
-      <CardHeader>
-        <CardTitle className="text-center text-lg">
-          {pollData.question}
-        </CardTitle>
+      <CardHeader className="text-center">
+        <CardTitle className=" text-lg">{pollData.question}</CardTitle>
+        <CardDescription
+          className={cn(
+            "transition-opacity duration-500 ease-in-out",
+            fade ? "opacity-100" : "opacity-0"
+          )}
+        >
+          {pollData &&
+            pollData.options.length > 0 &&
+            `${
+              pollData.options[currentIndex].percentage
+            }% people think ${pollData.options[
+              currentIndex
+            ].text.toLowerCase()}`}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         {pollData.options.map((option) => (
