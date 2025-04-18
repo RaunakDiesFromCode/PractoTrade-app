@@ -11,27 +11,26 @@ import { Input } from "./ui/input";
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   return (
-<<<<<<< HEAD
     <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-[70px] ">
-=======
-    // <div className="w-full flex justify-between items-center bg-background/60 backdrop-blur-md shadow-md px-30  border border-white/10 h-fit">
-    <div className="w-full flex justify-between items-center bg-black/60 backdrop-blur-md px-30 py-0.5  border border-white/10 h-[70px]">
->>>>>>> refs/remotes/origin/main
       {/* Left Section: Logo, Home, News */}
       <div className="flex items-center gap-5">
-        <Link href="/">
-          <Image
-            src="/practo.png"
-            width={100}
-            height={100}
-            className="rounded-full"
-            alt="logo"
-          />
-        </Link>
-        <Link href="/home" className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white">
+        <Image
+          src="/practo.png"
+          width={100}
+          height={100}
+          className="rounded-full"
+          alt="logo"
+        />
+        <Link
+          href="/home"
+          className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+        >
           Home
         </Link>
-        <Link href="/news" className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white">
+        <Link
+          href="/news"
+          className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+        >
           News
         </Link>
       </div>
