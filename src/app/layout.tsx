@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
 import Script from "next/script"; // ✅ Import Script
 import { AuthProvider } from "@/context/AuthContext";
+import { TnCAlertDialog } from "@/components/AlertDialogue";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,7 +42,9 @@ export default function RootLayout({
               <Navbar />
             </nav>
             <main className="mt-21">
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <TnCAlertDialog />
+                {children}</AuthProvider>
             </main>
             <Footer />
           </ReactQueryProvider>
