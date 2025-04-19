@@ -24,6 +24,7 @@ interface CompanyCardProps {
   futureStockPrice?: number;
   growth?: number;
   isIn: boolean; // Whether the company is based in India (INR) or not (USD)
+  isFav: boolean;
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({
@@ -33,6 +34,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   futureStockPrice,
   growth,
   isIn, // Receiving the isIn prop
+  isFav,
 }) => {
   const isGrowthPositive = (growth ?? 0) >= 0;
 
@@ -56,8 +58,8 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
               </CardDescription>
             </div>
             <div>
-              <Button size="icon" variant="ghost">
-                <Star fill="gold" size={36} />
+              <Button size="icon" variant="ghost" aria-label="Toggle Favorite">
+                <Star fill={isFav ? "gold" : "none"} size={36} />
               </Button>
             </div>
           </CardHeader>
