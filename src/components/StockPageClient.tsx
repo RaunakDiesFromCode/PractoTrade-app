@@ -47,7 +47,11 @@ export default function StockPageClient({ slug }: { slug: string }) {
         </div>
       </div>
       <div className="w-full flex flex-col gap-3">
-        <StockPriceCard company={company} slug={slug} />
+        <StockPriceCard
+          company={company}
+          slug={slug}
+          isFav={companyMeta?.is_fav ?? false}
+        />
         <div className="lg:block hidden">
           <StockNews slug={slug} />
         </div>

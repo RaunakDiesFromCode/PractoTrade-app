@@ -1,20 +1,30 @@
 "use client";
 
-// import { useToggleFavourite } from "@/hooks/useToggleFavourite"; // adjust import
+import React from "react";
+import { useToggleFavourite } from "@/hooks/useToggleFavourite"; // ✅ use it now
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Star, TrendingDown, TrendingUp } from "lucide-react";
+import { useState } from "react";
 
 export default function StockPriceCard({
   company,
   slug,
+  isFav,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   company: any;
   slug: string;
+  isFav: boolean;
 }) {
+  const [localFav, setLocalFav] = useState(isFav); // Local UI update
+  const toggleFav = useToggleFavourite();
 
+  const handleToggleFavourite = () => {
+    setLocalFav((prev) => !prev); // Optimistically toggle
+    toggleFav.mutate({ companyName: company.companyName });
+  };
 
   return (
     <Card className="overflow-hidden py-5">
@@ -37,9 +47,13 @@ export default function StockPriceCard({
             variant="ghost"
             size="icon"
             className="h-8 w-8"
+            onClick={handleToggleFavourite}
+            disabled={toggleFav.isPending}
           >
             <Star
-              className={`h-5 w-5 fill-yellow-400`}
+              className={`h-5 w-5 transition ${
+                localFav ? "fill-yellow-400 text-yellow-500" : "text-foreground"
+              }`}
             />
           </Button>
         </div>
@@ -91,7 +105,7 @@ export default function StockPriceCard({
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2"
           >
-            {/* Yahoo SVG Icon */}
+            {/* Yahoo Logo */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 3386.34 3010.5"
