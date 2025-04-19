@@ -1,4 +1,5 @@
 // hooks/useSingleStockPrediction.ts
+import { getUser } from "@/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -18,11 +19,18 @@ export const useSingleStockPrediction = (
   companyName: string,
   isIn: boolean
 ) => {
+  const user = getUser();
+  const viewerId = user?.trader_id;
+
   return useQuery({
-    queryKey: ["stock-prediction", ticker],
+    queryKey: ["stock-prediction", ticker, viewerId], // Include viewerId for cache invalidation if needed
     queryFn: async () => {
+      if (!viewerId) {
+        throw new Error("Viewer ID (trader_id) is required");
+      }
+
       const res = await axios.get<StockApiResponse>(
-        `https://implicit-electra-sagnify-8514ada8.koyeb.app/get_predicted_stock_price/${ticker}/`
+        `https://implicit-electra-sagnify-8514ada8.koyeb.app/get_predicted_stock_price/${ticker}/?viewer_id=${viewerId}`
       );
 
       const data = res.data;
@@ -46,7 +54,7 @@ export const useSingleStockPrediction = (
         isIn,
       };
     },
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 5, // 5 minutes
     retry: 1,
   });
 };
