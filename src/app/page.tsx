@@ -21,20 +21,21 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col">
       {/* Navigation */}
       <header className=" w-full border-b bg-background/95 ">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2"></div>
+        <div className=" flex h-16 items-center justify-between">
           <nav className="hidden md:flex items-center gap-20 mx-auto">
             <Link
               href="#features"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium relative group"
             >
               Features
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
             </Link>
             <Link
               href="#how-it-works"
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium relative group"
             >
               How It Works
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
             </Link>
           </nav>
         </div>
@@ -43,7 +44,7 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-36 bg-gradient-to-b from-background to-muted">
-          <div className="container px-4 md:px-6 mx-13">
+          <div className=" px-4 md:px-6 mx-13">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
@@ -93,7 +94,7 @@ export default function LandingPage() {
 
         {/* Features Section */}
         <section id="features" className="w-full py-12 md:py-24 lg:py-38">
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
@@ -151,7 +152,7 @@ export default function LandingPage() {
           id="how-it-works"
           className="w-full py-12 md:py-24 lg:py-40 bg-muted"
         >
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
@@ -203,7 +204,7 @@ export default function LandingPage() {
 
         {/* CTA Section */}
         <section className="w-full py-12 md:py-20 lg:py-20 bg-primary text-primary-foreground">
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
