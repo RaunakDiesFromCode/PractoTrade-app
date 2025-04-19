@@ -24,7 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import StockSentimentPoll from "./StockSentimentPoll";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import Posts from "./Posts";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
@@ -66,8 +66,61 @@ export default function StockPageClient({ slug }: { slug: string }) {
 
   if (isCompaniesLoading || isPredictionLoading) {
     return (
-      <div className="px-20 pt-5 flex gap-5 w-full">
-        <Skeleton className="w-full h-80" />
+      <div className="px-20 pt-5 flex gap-3 w-full">
+        {/* Left Section (Chart & Poll) */}
+        <div className="w-full flex flex-col gap-3">
+          <Card>
+            <CardHeader>
+              <Skeleton className="w-[200px] h-[28px] rounded-md" />
+            </CardHeader>
+            <div className="p-4">
+              <Skeleton className="w-full h-[300px] rounded-md" />
+            </div>
+          </Card>
+          <Card className="w-full mx-auto">
+            <CardHeader className="text-center">
+              <Skeleton className="w-[200px] h-[24px] mx-auto rounded-md mb-2" />
+              <Skeleton className="w-[250px] h-[16px] mx-auto rounded-full" />
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {[...Array(3)].map((_, i) => (
+                <Skeleton
+                  key={i}
+                  className="w-full h-[42px] rounded-md bg-muted/40"
+                />
+              ))}
+            </CardContent>
+            <CardFooter>
+              <Skeleton className="w-full h-[38px] rounded-md" />
+            </CardFooter>
+          </Card>
+        </div>
+
+        {/* Right Section (Company Info + Posts) */}
+        <div className="w-full flex flex-col gap-3">
+          <Card className="p-5">
+            <div className="flex justify-between">
+              <div className="space-y-2">
+                <Skeleton className="w-[150px] h-[28px] rounded-md" />
+                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+              </div>
+              <Skeleton className="w-[100px] h-[100px] rounded-md" />
+            </div>
+            <div className="mt-4">
+              <Skeleton className="w-[250px] h-[40px] rounded-md" />
+            </div>
+          </Card>
+
+          <Card className="p-4">
+            <Skeleton className="w-[120px] h-[20px] mb-4 rounded-full" />
+            <div className="space-y-3">
+              <Skeleton className="w-full h-[60px] rounded-md" />
+              <Skeleton className="w-full h-[60px] rounded-md" />
+            </div>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -214,7 +267,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
                 rel="noopener noreferrer"
               >
                 <div className="flex items-center gap-2">
-                  <FaYahoo size={64}/>
+                  <FaYahoo size={64} />
                   <div>View on Yahoo Finance</div>
                 </div>
               </Link>

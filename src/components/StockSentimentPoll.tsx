@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useCompanyPoll } from "@/hooks/useCompanyPoll";
+import { Skeleton } from "./ui/skeleton";
 
 type Props = {
   symbol: string;
@@ -50,12 +51,25 @@ export default function StockSentimentPoll({ symbol }: Props) {
   if (!pollData) {
     return (
       <Card className="w-full mx-auto">
-        <CardHeader>
-          <CardTitle className="text-center text-lg">Loading poll...</CardTitle>
+        <CardHeader className="text-center">
+          <Skeleton className="w-[200px] h-[24px] mx-auto rounded-md mb-2" />
+          <Skeleton className="w-[250px] h-[16px] mx-auto rounded-full" />
         </CardHeader>
+        <CardContent className="space-y-2">
+          {[...Array(3)].map((_, i) => (
+            <Skeleton
+              key={i}
+              className="w-full h-[42px] rounded-md bg-muted/40"
+            />
+          ))}
+        </CardContent>
+        <CardFooter>
+          <Skeleton className="w-full h-[38px] rounded-md" />
+        </CardFooter>
       </Card>
     );
   }
+
 
   return (
     <Card className="w-full mx-auto">
