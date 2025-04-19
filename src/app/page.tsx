@@ -1,6 +1,13 @@
 import Link from "next/link";
 // import Image from "next/image";
-import { ArrowRight, BarChart3, ChevronDown, LineChart, Shield, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  ChevronDown,
+  LineChart,
+  Shield,
+  Zap,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -217,10 +224,10 @@ export default function LandingPage() {
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                <h2 className="text-3xl font-bold tracking-tighter md:text-4x text-background/90">
                   Ready to Trade Smarter?
                 </h2>
-                <p className="max-w-[600px] text-white-foreground/90 md:text-xl/relaxed">
+                <p className="max-w-[600px] text-white-foreground/90 md:text-xl/relaxed text-background/70">
                   Join thousands of traders who are making more informed
                   decisions with Practo Trade.
                 </p>
