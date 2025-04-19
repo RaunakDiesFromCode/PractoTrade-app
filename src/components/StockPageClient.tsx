@@ -40,7 +40,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
 
   return (
     <div className="px-4 sm:px-6 md:px-10 lg:px-20 pt-5 flex flex-col lg:flex-row gap-3 w-full">
-      <div className="w-full flex flex-col gap-3 mb-3 lg:mb-0">
+      <div className="w-full flex flex-col gap-3 lg:mb-0">
         <StockChartSwitcher slug={slug} />
         <div className="lg:block hidden">
           <StockSentiment slug={slug} />
