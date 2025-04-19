@@ -8,11 +8,20 @@ import { Home, Moon, NewspaperIcon, Search, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Input } from "./ui/input";
 import AuthButton from "./AuthButton";
-// import { cn } from "@/lib/utils"; // Assuming you have a utility to merge classnames
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const router = useRouter(); // useRouter hook to navigate
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent form default submission behavior
+    if (searchQuery) {
+      router.push(`/search/?search=${searchQuery}`); // Navigate to search page with query
+    }
+  };
 
   return (
     <>
@@ -26,7 +35,7 @@ const Navbar = () => {
             className="rounded-full scale-75 md:scale-100 dark:invert-0 invert-100"
             alt="logo"
           />
-          <div className="hidden md:flex  gap-5">
+          <div className="hidden md:flex gap-5">
             <Link
               href="/home"
               className="text-foreground/70 text-lg font-semibold hover:scale-101 hover:text-foreground"
@@ -57,23 +66,29 @@ const Navbar = () => {
         {/* Right Section */}
         <div className="flex items-center gap-3">
           {/* Desktop Search */}
-          <div className="hidden md:flex items-center gap-0">
+          <form
+            onSubmit={handleSearch}
+            className="hidden md:flex items-center gap-0"
+          >
             <Input
               className="px-3 w-60 rounded-r-none font-semibold bg-transparent"
               type="text"
               placeholder="Search for stocks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)} // Update search query
             />
             <Button
               className="cursor-pointer rounded-l-none px-3 w-10"
               variant="outline"
+              type="submit" // This will trigger the form submission
             >
               <Search />
             </Button>
-          </div>
+          </form>
 
           {/* Mobile Search Icon */}
           <Button
-            className="md:hidden px-2" // changed from md:hidden to md:hidden
+            className="md:hidden px-2"
             variant="outline"
             size="icon"
             onClick={() => setShowMobileSearch((prev) => !prev)}
@@ -100,17 +115,22 @@ const Navbar = () => {
       {/* Mobile Search Bar */}
       {showMobileSearch && (
         <div className="md:hidden flex px-4 py-2 bg-background/70 backdrop-blur border-t border-white/10">
-          <Input
-            className="w-full px-3 py-2 font-semibold bg-transparent rounded-r-none"
-            type="text"
-            placeholder="Search for stocks..."
-          />
-          <Button
-            className="cursor-pointer rounded-l-none px-3 w-10"
-            variant="outline"
-          >
-            <Search />
-          </Button>
+          <form onSubmit={handleSearch} className="w-full flex">
+            <Input
+              className="w-full px-3 py-2 font-semibold bg-transparent rounded-r-none"
+              type="text"
+              placeholder="Search for stocks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+            />
+            <Button
+              className="cursor-pointer rounded-l-none px-3 w-10"
+              variant="outline"
+              type="submit"
+            >
+              <Search />
+            </Button>
+          </form>
         </div>
       )}
     </>
