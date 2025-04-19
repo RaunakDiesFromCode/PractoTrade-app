@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, BarChart3, LineChart, Shield, Zap } from "lucide-react";
+// import Image from "next/image";
+import { ArrowRight, BarChart3, ChevronDown, LineChart, Shield, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +12,9 @@ import {
 
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col -mt-20">
       {/* Navigation */}
-      <header className=" w-full border-b bg-background/95 ">
+      {/* <header className=" w-full border-b bg-background/95 ">
         <div className=" flex h-16 items-center justify-between">
           <nav className="hidden md:flex items-center gap-20 mx-auto">
             <Link
@@ -35,20 +35,23 @@ export default function LandingPage() {
             </Link>
           </nav>
         </div>
-      </header>
+      </header> */}
 
-      <main className="flex-1">
+      <main className="flex-1 text-shadow-lg">
         {/* Hero Section */}
-        <div className="relative w-full h-screen overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/stock_vedio.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        <div className="relative w-full h-screen overflow-hidden pt-10">
+          <div className="absolute inset-0 w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              className="w-full h-full object-cover contrast-170"
+            >
+              <source src="/stock_vedio.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent"></div>
+          </div>
           <div className="relative z-10">
             <section className="w-full px-5 md:px-10 py-12 md:py-24 lg:py-36">
               <div className="">
@@ -69,7 +72,7 @@ export default function LandingPage() {
                       trading decisions.
                     </p>
                     <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                      <Button size="lg" asChild>
+                      <Button size="lg" asChild className="drop-shadow-xl">
                         <Link href="/home">
                           Get started <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
@@ -84,18 +87,16 @@ export default function LandingPage() {
                   </div>
                   <div className="mx-auto lg:mx-0 relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur-3xl opacity-70"></div>
-                    <Image
-                      src="/practo_landing_3.png"
-                      alt="Practo Trade Dashboard"
-                      width={600}
-                      height={600}
-                      className="relative rounded-xl border shadow-3xl"
-                      priority
-                    />
                   </div>
                 </div>
               </div>
             </section>
+          </div>
+          <div className="absolute bottom-4 z-20 overflow-hidden w-screen text-center text-foreground/70">
+            Scroll to know more
+            <div className="whitespace-nowrap animate-scroll px-4 text-white flex justify-center w-screen text-center text-sm md:text-base font-medium">
+              <ChevronDown />
+            </div>
           </div>
         </div>
 
