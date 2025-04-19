@@ -9,6 +9,7 @@ import {
 import { Separator } from "./ui/separator";
 import {
   ChevronRight,
+  Star,
   TrendingDown,
   TrendingUp,
   TrendingUpDown,
@@ -47,11 +48,18 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
     <Link href={`/company/${ticker}`}>
       <Card className="gap-2 h-fit pt-3 pb-1 hover:scale-101 transition-all duration-200 ease-in-out">
         <div className="flex items-center justify-between px-5">
-          <CardHeader className="p-0 m-0 w-full">
-            <CardTitle className="font-bold text-xl">{ticker}</CardTitle>
-            <CardDescription className="pb-0 mb-0">
-              {companyName}
-            </CardDescription>
+          <CardHeader className="p-0 m-0 w-full flex gap-2 items-center">
+            <div className="">
+              <CardTitle className="font-bold text-xl">{ticker}</CardTitle>
+              <CardDescription className="pb-0 mb-0">
+                {companyName}
+              </CardDescription>
+            </div>
+            <div>
+              <Button size="icon" variant="ghost">
+                <Star fill="gold" size={36} />
+              </Button>
+            </div>
           </CardHeader>
           <div className="flex flex-col items-center justify-center">
             <div

@@ -3,7 +3,7 @@
 import React from "react";
 import CompanyCards from "./CompanyCards";
 import { Button } from "./ui/button";
-import { ArrowUpDown, Bolt, Funnel, Languages } from "lucide-react";
+import { ArrowUpDown, Bolt, Funnel} from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const Homepage = () => {
@@ -28,10 +28,6 @@ const Homepage = () => {
           <Button variant="outline">
             <span className="md:block hidden">Settings</span>
             <Bolt />
-          </Button>
-          <Button variant="outline">
-            <span className="md:block hidden">English</span>
-            <Languages />
           </Button>
         </div>
       </div>
