@@ -10,25 +10,27 @@ const Homepage = () => {
   const { user } = useAuth();
 
   return (
-    <div className="px-20 pt-10">
+    <div className="px-5 md:px-20 pt-10">
       <div className="flex items-center gap-3 mb-5 mx-5 justify-between">
-        <span className="font-bold text-3xl">Hi {user?.username}!</span>
+        <span className="font-bold text-xl sm:text-2xl md:text-3xl">
+          Hi {user?.username}!
+        </span>
 
         <div className="flex items-center gap-2">
           <Button variant="outline">
-            <span>Sort </span>
+            <span className="md:block hidden">Sort </span>
             <ArrowUpDown />
           </Button>
           <Button variant="outline">
-            <span>Filter </span>
+            <span className="md:block hidden">Filter </span>
             <Funnel />
           </Button>
           <Button variant="outline">
-            <span>Settings</span>
+            <span className="md:block hidden">Settings</span>
             <Bolt />
           </Button>
           <Button variant="outline">
-            <span>English</span>
+            <span className="md:block hidden">English</span>
             <Languages />
           </Button>
         </div>
