@@ -5,6 +5,9 @@ import axios from "axios";
 interface StockApiResponse {
   company: string;
   avg_predicted_price: number;
+  predicted_with_sentiment: number;
+  predicted_without_sentiment: number;
+  arima_pred: number;
   predicted_percentage_change: number;
   direction: string;
   prediction_time: string;
@@ -35,7 +38,10 @@ export const useSingleStockPrediction = (
         companyName,
         ticker,
         currentStockPrice: currentPrice,
-        futureStockPrice: data.avg_predicted_price,
+        avgPrice: data.avg_predicted_price,
+        withSentiment: data.predicted_with_sentiment,
+        withoutSentiment: data.predicted_without_sentiment,
+        arima: data.arima_pred,
         growth: data.predicted_percentage_change,
         isIn,
       };

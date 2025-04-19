@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Star, TrendingDown, TrendingUp } from "lucide-react";
 import { useState } from "react";
+import { Separator } from "./ui/separator";
 
 export default function StockPriceCard({
   company,
@@ -58,36 +59,76 @@ export default function StockPriceCard({
           </Button>
         </div>
 
-        <div className="flex w-full justify-between text-lg">
-          <div>
-            <div className="text-muted-foreground text-xs">Closing</div>
-            <div className="font-medium">
-              {company.currentStockPrice}
-              <span className="text-xs ml-0.5">
-                {company.isIn ? "INR" : "USD"}
-              </span>
+        <div className="flex flex-col w-full justify-between text-sm sm:text-base gap-4 mt-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-center">
+              <div className="text-muted-foreground text-base">Closing Price</div>
+              <div className="font-medium text-lg">
+                {company.currentStockPrice}
+                <span className="text-xs ml-0.5">
+                  {company.isIn ? "INR" : "USD"}
+                </span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="text-muted-foreground text-base">
+                Predicted Price
+              </div>
+              <div className="font-medium text-lg">
+                {company.avgPrice}
+                <span className="text-xs ml-0.5">
+                  {company.isIn ? "INR" : "USD"}
+                </span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="text-muted-foreground text-base">Growth</div>
+              <div
+                className={`font-medium text-lg ${
+                  company.growth < 0 ? "text-red-500" : "text-green-500"
+                }`}
+              >
+                {company.growth}
+                <span className="text-xs">%</span>
+              </div>
             </div>
           </div>
-
-          <div>
-            <div className="text-muted-foreground text-xs">Predicted</div>
-            <div className="font-medium">
-              {company.futureStockPrice}
-              <span className="text-xs ml-0.5">
-                {company.isIn ? "INR" : "USD"}
-              </span>
+          <Separator className="my-2"/>
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-center">
+              <div className="text-muted-foreground text-xs">
+                Sentiment Model
+              </div>
+              <div className="font-medium">
+                {company.withSentiment}
+                <span className="text-xs ml-0.5">
+                  {company.isIn ? "INR" : "USD"}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <div className="text-muted-foreground text-xs">Growth</div>
-            <div
-              className={`font-medium ${
-                company.growth < 0 ? "text-red-500" : "text-green-500"
-              }`}
-            >
-              {company.growth}
-              <span className="text-xs">%</span>
+            <div className="text-center">
+              <div className="text-muted-foreground text-xs">
+                Traditional Model
+              </div>
+              <div className="font-medium">
+                {company.withoutSentiment}
+                <span className="text-xs ml-0.5">
+                  {company.isIn ? "INR" : "USD"}
+                </span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="text-muted-foreground text-xs">ARIMA Model</div>
+              <div className="font-medium">
+                {company.arima}
+                <span className="text-xs ml-0.5">
+                  {company.isIn ? "INR" : "USD"}
+                </span>
+              </div>
             </div>
           </div>
         </div>

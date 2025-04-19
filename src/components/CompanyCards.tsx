@@ -59,7 +59,17 @@ const CompanyPredictionWrapper: React.FC<{
   if (isLoading) return <SkeletonCard />;
   if (isError || !prediction) return null;
 
-  return <CompanyCard isFav={isFav} {...prediction} />; // Pass isFav correctly
+  return (
+    <CompanyCard
+      isFav={isFav}
+      companyName={prediction.companyName}
+      ticker={prediction.ticker}
+      currentStockPrice={prediction.currentStockPrice}
+      futureStockPrice={prediction.avgPrice} // ✅ map avgPrice to futureStockPrice
+      growth={prediction.growth}
+      isIn={prediction.isIn}
+    />
+  );
 };
 
 

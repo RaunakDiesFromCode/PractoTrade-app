@@ -21,7 +21,7 @@ export const useNews = () => {
         );
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
-        setNews(data);
+        setNews(data.news); // ✅ Grab the actual array
       } catch (err: string | unknown) {
         if (err instanceof Error) {
           setError(err.message);

@@ -57,10 +57,10 @@ export default function LandingPage() {
               <div className="">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                   <div className="flex flex-col justify-center space-y-4">
-                    <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
+                    <div className="inline-block rounded-lg bg-white/10 px-3 py-1 text-sm text-white">
                       Next-Gen Stock Analysis
                     </div>
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                    <h1 className="text-3xl text-white font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                       Decode Sentiment,
                       <br />
                       Trade Confidently
@@ -78,9 +78,9 @@ export default function LandingPage() {
                         </Link>
                       </Button>
                     </div>
-                    <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-4 text-sm text-white">
                       <div className="flex items-center gap-1">
-                        <Shield className="h-4 w-4 text-primary" />
+                        <Shield className="h-4 w-4 text-white" />
                         <span>Secure & Private</span>
                       </div>
                     </div>
@@ -107,7 +107,7 @@ export default function LandingPage() {
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
+                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-white">
                   Features
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
@@ -123,7 +123,7 @@ export default function LandingPage() {
               <Card className="relative overflow-hidden">
                 <div className="absolute top-0 right-0 h-16 w-16 bg-primary/10 rounded-bl-full"></div>
                 <CardHeader>
-                  <BarChart3 className="h-10 w-10 text-primary mb-2" />
+                  <BarChart3 className="h-10 w-10 text-white mb-2" />
                   <CardTitle>Real-time Sentiment</CardTitle>
                   <CardDescription>
                     Track market sentiment as it evolves with real-time analysis
@@ -134,7 +134,7 @@ export default function LandingPage() {
               <Card className="relative overflow-hidden">
                 <div className="absolute top-0 right-0 h-16 w-16 bg-primary/10 rounded-bl-full"></div>
                 <CardHeader>
-                  <LineChart className="h-10 w-10 text-primary mb-2" />
+                  <LineChart className="h-10 w-10 text-white mb-2" />
                   <CardTitle>Predictive Analytics</CardTitle>
                   <CardDescription>
                     Advanced algorithms predict market movements based on
@@ -145,7 +145,7 @@ export default function LandingPage() {
               <Card className="relative overflow-hidden">
                 <div className="absolute top-0 right-0 h-16 w-16 bg-primary/10 rounded-bl-full"></div>
                 <CardHeader>
-                  <Zap className="h-10 w-10 text-primary mb-2" />
+                  <Zap className="h-10 w-10 text-white mb-2" />
                   <CardTitle>Latest News</CardTitle>
                   <CardDescription>
                     Stay updated with the latest news articles and trends that
@@ -165,7 +165,7 @@ export default function LandingPage() {
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
+                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-white">
                   How It Works
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
@@ -180,7 +180,7 @@ export default function LandingPage() {
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 mt-12">
               <div className="flex flex-col items-center space-y-2 text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                  <span className="text-2xl font-bold text-primary">1</span>
+                  <span className="text-2xl font-bold text-white">1</span>
                 </div>
                 <h3 className="text-xl font-bold">Data Collection</h3>
                 <p className="text-muted-foreground">
@@ -190,7 +190,7 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col items-center space-y-2 text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                  <span className="text-2xl font-bold text-primary">2</span>
+                  <span className="text-2xl font-bold text-white">2</span>
                 </div>
                 <h3 className="text-xl font-bold">Sentiment Analysis</h3>
                 <p className="text-muted-foreground">
@@ -200,7 +200,7 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col items-center space-y-2 text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                  <span className="text-2xl font-bold text-primary">3</span>
+                  <span className="text-2xl font-bold text-white">3</span>
                 </div>
                 <h3 className="text-xl font-bold">Actionable Insights</h3>
                 <p className="text-muted-foreground">
@@ -213,14 +213,14 @@ export default function LandingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-12 md:py-20 lg:py-20 bg-primary text-primary-foreground">
+        <section className="w-full py-12 md:py-20 lg:py-20 bg-primary text-white-foreground">
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
                   Ready to Trade Smarter?
                 </h2>
-                <p className="max-w-[600px] text-primary-foreground/90 md:text-xl/relaxed">
+                <p className="max-w-[600px] text-white-foreground/90 md:text-xl/relaxed">
                   Join thousands of traders who are making more informed
                   decisions with Practo Trade.
                 </p>

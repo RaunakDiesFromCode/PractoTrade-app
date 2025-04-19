@@ -23,19 +23,19 @@ const Navbar = () => {
             src="/practo.png"
             width={100}
             height={100}
-            className="rounded-full scale-75 md:scale-100"
+            className="rounded-full scale-75 md:scale-100 dark:invert-0 invert-100"
             alt="logo"
           />
           <div className="hidden md:flex  gap-5">
             <Link
               href="/home"
-              className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+              className="text-foreground/70 text-lg font-semibold hover:scale-101 hover:text-foreground"
             >
               Home
             </Link>
             <Link
               href="/news"
-              className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+              className="text-foreground/70 text-lg font-semibold hover:scale-101 hover:text-foreground"
             >
               News
             </Link>
