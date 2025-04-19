@@ -22,7 +22,8 @@ const CompanyCards: React.FC = () => {
   if (isError || !companies) {
     return (
       <div className="text-center text-red-500 py-10">
-        Error loading companies: {(error as Error).message}
+        Error loading companies:{" "}
+        {error instanceof Error ? error.message : "Unknown error occurred"}
       </div>
     );
   }
@@ -35,6 +36,7 @@ const CompanyCards: React.FC = () => {
           ticker={company.ticker}
           name={company.name}
           isIn={company.is_in}
+          isFav={company.is_fav}
         />
       ))}
     </div>
@@ -45,7 +47,9 @@ const CompanyPredictionWrapper: React.FC<{
   ticker: string;
   name: string;
   isIn: boolean;
-}> = ({ ticker, name, isIn }) => {
+  isFav: boolean; // Expecting isFav prop here
+}> = ({ ticker, name, isIn, isFav }) => {
+  // Accept isFav prop here
   const {
     data: prediction,
     isLoading,
@@ -55,7 +59,8 @@ const CompanyPredictionWrapper: React.FC<{
   if (isLoading) return <SkeletonCard />;
   if (isError || !prediction) return null;
 
-  return <CompanyCard {...prediction} />;
+  return <CompanyCard isFav={isFav} {...prediction} />; // Pass isFav correctly
 };
+
 
 export default CompanyCards;

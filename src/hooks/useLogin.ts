@@ -1,12 +1,10 @@
-// import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext"; // Ensure this is properly configured
 
 export function useLogin() {
-  // const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { setUser } = useAuth();
+  const { setUser } = useAuth(); // Assuming you have a context for global state
 
   const login = async (email: string, password: string) => {
     setLoading(true);
@@ -25,8 +23,15 @@ export function useLogin() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
 
-      setUser(data); // now updates global state too
-      window.location.href = "/home"; // hard redirect
+      // Save user details including trader_id
+      setUser({
+        trader_id: data.trader_id,
+        username: data.username,
+        email: data.email,
+      });
+
+      // Redirect to home page after login
+      window.location.href = "/home";
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Login failed");

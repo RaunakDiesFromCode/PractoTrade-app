@@ -1,13 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+// import { useToggleFavourite } from "@/hooks/useToggleFavourite"; // adjust import
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { FaYahoo } from "react-icons/fa";
-import {
-  TrendingUp,
-  TrendingDown,
-  TrendingUpIcon as TrendingUpDown,
-} from "lucide-react";
+import { Star, TrendingDown, TrendingUp } from "lucide-react";
 
 export default function StockPriceCard({
   company,
@@ -17,70 +14,96 @@ export default function StockPriceCard({
   company: any;
   slug: string;
 }) {
+
+
   return (
-    <Card>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-5">
-        <CardHeader className="px-2 py-3 sm:py-6">
-          <CardTitle className="text-xl sm:text-2xl flex gap-1 items-center">
-            {company.companyName}
+    <Card className="overflow-hidden py-5">
+      <div className="px-10">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <h3 className="font-semibold text-lg md:text-2xl">
+              {company.companyName}
+            </h3>
             {typeof company.growth === "number" ? (
               company.growth >= 0 ? (
-                <TrendingUp className="text-green-500" />
+                <TrendingUp className="h-4 w-4 text-green-500" />
               ) : (
-                <TrendingDown className="text-red-500" />
+                <TrendingDown className="h-4 w-4 text-red-500" />
               )
-            ) : (
-              <TrendingUpDown className="text-muted-foreground" />
-            )}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-2 py-0 sm:py-6">
-          <div className="space-y-2 text-sm flex flex-wrap items-center gap-4">
-            <div className="flex flex-col items-end">
-              <div>Closing Price:</div>
-              <div className="font-semibold text-lg">
-                {company.currentStockPrice}{" "}
-                <span className="text-sm">{company.isIn ? "INR" : "USD"}</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-end">
-              <div>Predicted Price:</div>
-              <div className="font-semibold text-lg">
-                {company.futureStockPrice}{" "}
-                <span className="text-sm">{company.isIn ? "INR" : "USD"}</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-end">
-              <div>Growth:</div>
-              <div
-                className={`font-semibold text-lg ${
-                  company.growth < 0 ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {company.growth}
-                <span className="text-sm">%</span>
-              </div>
+            ) : null}
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+          >
+            <Star
+              className={`h-5 w-5 fill-yellow-400`}
+            />
+          </Button>
+        </div>
+
+        <div className="flex w-full justify-between text-lg">
+          <div>
+            <div className="text-muted-foreground text-xs">Closing</div>
+            <div className="font-medium">
+              {company.currentStockPrice}
+              <span className="text-xs ml-0.5">
+                {company.isIn ? "INR" : "USD"}
+              </span>
             </div>
           </div>
-        </CardContent>
+
+          <div>
+            <div className="text-muted-foreground text-xs">Predicted</div>
+            <div className="font-medium">
+              {company.futureStockPrice}
+              <span className="text-xs ml-0.5">
+                {company.isIn ? "INR" : "USD"}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-muted-foreground text-xs">Growth</div>
+            <div
+              className={`font-medium ${
+                company.growth < 0 ? "text-red-500" : "text-green-500"
+              }`}
+            >
+              {company.growth}
+              <span className="text-xs">%</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <Separator />
-      <Button
-        asChild
-        className="w-fit mx-auto sm:mx-10 p-2 sm:p-2.5 my-2 sm:my-0"
-        variant={"outline"}
-      >
-        <Link
-          href={`https://finance.yahoo.com/quote/${slug}/`}
-          target="_blank"
-          rel="noopener noreferrer"
+
+      <div className="bg-muted/30 p-2">
+        <Button
+          asChild
+          variant="ghost"
+          className="w-full h-8 text-xs sm:text-sm"
         >
-          <div className="flex items-center gap-2">
-            <FaYahoo className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16" />
-            <div className="text-sm sm:text-base">View on Yahoo Finance</div>
-          </div>
-        </Link>
-      </Button>
+          <Link
+            href={`https://finance.yahoo.com/quote/${slug}/`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2"
+          >
+            {/* Yahoo SVG Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 3386.34 3010.5"
+              fill="#5f01d1"
+              className="w-4 h-4"
+            >
+              <path d="M0 732.88h645.84l376.07 962.1 380.96-962.1h628.76l-946.8 2277.62H451.98l259.19-603.53L.02 732.88zm2763.84 768.75h-704.26L2684.65 0l701.69.03-622.5 1501.6zm-519.78 143.72c216.09 0 391.25 175.17 391.25 391.22 0 216.06-175.16 391.23-391.25 391.23-216.06 0-391.19-175.17-391.19-391.23 0-216.05 175.16-391.22 391.19-391.22z" />
+            </svg>
+            <span>View on Yahoo Finance</span>
+          </Link>
+        </Button>
+      </div>
     </Card>
   );
 }
