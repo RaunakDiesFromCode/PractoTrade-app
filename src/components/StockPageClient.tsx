@@ -24,7 +24,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
 
   if (isCompaniesLoading || isPredictionLoading) {
     return (
-      <div className="px-4 sm:px-6 md:px-10 lg:px-20 pt-5 flex flex-col md:flex-row gap-3 w-full">
+      <div className="px-4 sm:px-6 lg:px-10 lg:px-20 pt-5 flex flex-col lg:flex-row gap-3 w-full">
         <Skeleton />
       </div>
     );
@@ -39,22 +39,22 @@ export default function StockPageClient({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="px-4 sm:px-6 md:px-10 lg:px-20 pt-5 flex flex-col md:flex-row gap-3 w-full">
-      <div className="w-full flex flex-col gap-3 mb-3 md:mb-0">
+    <div className="px-4 sm:px-6 md:px-10 lg:px-20 pt-5 flex flex-col lg:flex-row gap-3 w-full">
+      <div className="w-full flex flex-col gap-3 mb-3 lg:mb-0">
         <StockChartSwitcher slug={slug} />
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <StockSentiment slug={slug} />
         </div>
       </div>
       <div className="w-full flex flex-col gap-3">
         <StockPriceCard company={company} slug={slug} />
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <StockNews slug={slug} />
         </div>
-        <div className="md:hidden block">
+        <div className="lg:hidden block">
           <StockSentiment slug={slug} />
         </div>
-        <div className="md:hidden block">
+        <div className="lg:hidden block">
           <StockNews slug={slug} />
         </div>
       </div>
