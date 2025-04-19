@@ -127,6 +127,10 @@ body {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   touch-action: pan-y;
