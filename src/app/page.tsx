@@ -5,14 +5,12 @@ import {
   BarChart3,
   LineChart,
   Shield,
-  Users,
   Zap,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
