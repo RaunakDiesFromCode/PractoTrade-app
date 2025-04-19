@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Moon, Search, Sun, X } from "lucide-react";
+import { Home, Moon, NewspaperIcon, Search, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Input } from "./ui/input";
 import AuthButton from "./AuthButton";
@@ -14,31 +14,44 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
-
   return (
     <>
-      <div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg px-4 sm:px-8 py-0.5 border border-white/15 h-[70px]">
+      <div className="w-full flex justify-between items-center bg-background/50 backdrop-blur-lg px-4 md:px-8 py-0.5 border border-white/15 h-[70px]">
         {/* Left Section */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center md:gap-5">
           <Image
             src="/practo.png"
             width={100}
             height={100}
-            className="rounded-full"
+            className="rounded-full scale-75 md:scale-100"
             alt="logo"
           />
-          <Link
-            href="/home"
-            className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
-          >
-            Home
-          </Link>
-          <Link
-            href="/news"
-            className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
-          >
-            News
-          </Link>
+          <div className="hidden md:flex  gap-5">
+            <Link
+              href="/home"
+              className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+            >
+              Home
+            </Link>
+            <Link
+              href="/news"
+              className="text-white/70 text-lg font-semibold hover:scale-101 hover:text-white"
+            >
+              News
+            </Link>
+          </div>
+          <div className="flex md:hidden gap-2">
+            <Link href="/home">
+              <Button variant="outline" size="icon">
+                <Home />
+              </Button>
+            </Link>
+            <Link href="/news">
+              <Button variant="outline" size="icon">
+                <NewspaperIcon />
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Right Section */}
@@ -60,7 +73,7 @@ const Navbar = () => {
 
           {/* Mobile Search Icon */}
           <Button
-            className="md:hidden px-2" // changed from sm:hidden to md:hidden
+            className="md:hidden px-2" // changed from md:hidden to md:hidden
             variant="outline"
             size="icon"
             onClick={() => setShowMobileSearch((prev) => !prev)}
@@ -86,7 +99,7 @@ const Navbar = () => {
 
       {/* Mobile Search Bar */}
       {showMobileSearch && (
-        <div className="sm:hidden flex px-4 py-2 bg-background/70 backdrop-blur border-t border-white/10">
+        <div className="md:hidden flex px-4 py-2 bg-background/70 backdrop-blur border-t border-white/10">
           <Input
             className="w-full px-3 py-2 font-semibold bg-transparent rounded-r-none"
             type="text"

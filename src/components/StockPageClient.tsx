@@ -24,7 +24,7 @@ export default function StockPageClient({ slug }: { slug: string }) {
 
   if (isCompaniesLoading || isPredictionLoading) {
     return (
-      <div className="px-4 sm:px-6 lg:px-10 lg:px-20 pt-5 flex flex-col lg:flex-row gap-3 w-full">
+      <div className="px-4 sm:px-6 md:px-10 lg:px-20 pt-5 flex flex-col lg:flex-row gap-3 w-full">
         <Skeleton />
       </div>
     );
