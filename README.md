@@ -1,6 +1,6 @@
 
 
-![Logo](https://github.com/RaunakDiesFromCode/PractoTrade-app/blob/main/public/practo.png)
+<img src="https://github.com/RaunakDiesFromCode/PractoTrade-app/blob/main/public/practo.png" alt="drawing" width="200"/>
 
 # 📉 PractoTrade — Sentiment-Driven Stock Price Predictor (Frontend)
 
