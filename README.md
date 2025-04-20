@@ -1,3 +1,7 @@
+
+
+![Logo](https://github.com/RaunakDiesFromCode/PractoTrade-app/blob/main/public/practo.png)
+
 # 📉 PractoTrade — Sentiment-Driven Stock Price Predictor (Frontend)
 
 The frontend of the **PractoTrade** application allows users to view sentiment-driven stock predictions, interact with community polls, and get insights into the latest stock trends using a sleek and responsive interface.
